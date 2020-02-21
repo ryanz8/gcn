@@ -1,8 +1,8 @@
-from gcn.layers import *
-from gcn.metrics import *
+from layers import *
+from metrics import *
 
-flags = tf.app.flags
-FLAGS = flags.FLAGS
+#flags = tf.app.flags
+#FLAGS = flags.FLAGS
 
 
 class Model(object):

@@ -4,16 +4,16 @@ from __future__ import print_function
 import time
 import tensorflow as tf
 
-from gcn.utils import *
-from gcn.models import GCN, MLP
+from utils import *
+from models import GCN, MLP
 
 # Set random seed
 seed = 123
 np.random.seed(seed)
-tf.set_random_seed(seed)
+tf.random.set_seed(seed)
 
 # Settings
-flags = tf.app.flags
+flags = tf.compat.v1.flags
 FLAGS = flags.FLAGS
 flags.DEFINE_string('dataset', 'cora', 'Dataset string.')  # 'cora', 'citeseer', 'pubmed'
 flags.DEFINE_string('model', 'gcn', 'Model string.')  # 'gcn', 'gcn_cheby', 'dense'
@@ -47,8 +47,8 @@ else:
 
 # Define placeholders
 placeholders = {
-    'support': [tf.sparse_placeholder(tf.float32) for _ in range(num_supports)],
-    'features': tf.sparse_placeholder(tf.float32, shape=tf.constant(features[2], dtype=tf.int64)),
+    'support': [tf.compat.v1.sparse_placeholder(tf.float32) for _ in range(num_supports)],
+    'features': tf.compat.v1.sparse_placeholder(tf.float32, shape=tf.constant(features[2], dtype=tf.int64)),
     'labels': tf.placeholder(tf.float32, shape=(None, y_train.shape[1])),
     'labels_mask': tf.placeholder(tf.int32),
     'dropout': tf.placeholder_with_default(0., shape=()),
